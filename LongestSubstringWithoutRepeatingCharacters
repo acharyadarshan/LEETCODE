@@ -1,0 +1,37 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+
+    """
+    1)You traverse the string until you find a duplicate character
+    2)Combination of letters before duplicate will thus is your sub_string
+    3)for abcdefcgh , here c at index 6 is  repeated so abcdef will be your substring and now your new substring index
+    will be  index of c = (2) + 1- means it  starts from index of d(you then start to traverse from d)
+    4) you have to  update the index of c -meaning your c index will be equal to your current substring postion
+    which is c = 6
+    5) for else part , if there is no duplicate , then you just have to add letters to dictionary and compare for max lengthOfLongestSubstring
+    """
+        
+        cur_sub_index = 0
+        max_length = 0
+        sub_string = dict()
+        cur _len = 0
+        
+        for i ,letter in enumerate(s):
+            
+            if letter in sub_string and sub_string[letter]>=cur_sub_index:
+                cur_sub_index = sub_string[letter]+1
+                cur_len = i - sub_string[letter]
+                sub_string[letter ] = i
+                
+            else:
+                sub_string[letter] = i 
+                cur_len += 1
+                if cur_len>max_length:
+                    max_length = cur_len
+                    
+            return max_length
+                
+        
+        
+        
+        
